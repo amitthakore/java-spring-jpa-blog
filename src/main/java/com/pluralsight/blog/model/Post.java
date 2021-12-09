@@ -5,14 +5,30 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
+@Entity
 public class Post {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String lead;
+    @Column(length=1000000)
+    @Lob
     private String body;
     private String author;
+    @Temporal(TemporalType.DATE)
     private Date date;
+    @ManyToOne
+    private Category category;
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
 
     public Post() {
         super();
